@@ -69,6 +69,15 @@ limitations under the License.
           firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
+            .then(function (user) {
+              var emailVerified = user.emailVerified;
+              if (emailVerified) {
+                alert("Welcome User");
+              } else {
+                // Email Verification sent!
+                alert("Email Verification Sent! Please Verify before Login.");
+              }
+            })
             .catch(function (error) {
               // Handle Errors here.
               var errorCode = error.code;
@@ -83,37 +92,6 @@ limitations under the License.
             });
         }
         document.getElementById("quickstart-sign-in").disabled = true;
-      }
-
-      /**
-       * Handles the sign up button press.
-       */
-      function handleSignUp() {
-        var email = document.getElementById("email").value;
-        var password = document.getElementById("password").value;
-        if (email.length < 4) {
-          alert("Please enter an email address.");
-          return;
-        }
-        if (password.length < 4) {
-          alert("Please enter a password.");
-          return;
-        }
-        // Create user with email and pass.
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password)
-          .catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode == "auth/weak-password") {
-              alert("The password is too weak.");
-            } else {
-              alert(errorMessage);
-            }
-            console.log(error);
-          });
       }
 
       /**
@@ -195,9 +173,6 @@ limitations under the License.
         document
           .getElementById("quickstart-sign-in")
           .addEventListener("click", toggleSignIn, false);
-        document
-          .getElementById("quickstart-sign-up")
-          .addEventListener("click", handleSignUp, false);
         document
           .getElementById("quickstart-verify-email")
           .addEventListener("click", sendEmailVerification, false);
@@ -293,14 +268,7 @@ limitations under the License.
                 Sign In
               </button>
               &nbsp;&nbsp;&nbsp;
-              <button
-                class="mdl-button mdl-js-button mdl-button--raised"
-                id="quickstart-sign-up"
-                name="signup"
-              >
-                Sign Up
-              </button>
-              &nbsp;&nbsp;&nbsp;
+
               <button
                 class="mdl-button mdl-js-button mdl-button--raised"
                 disabled
