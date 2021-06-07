@@ -1,14 +1,3 @@
-var firebaseConfig = {
-  apiKey: "AIzaSyA04jtRQQ7hTXyiJP3esowPxW7tW_7EAhA",
-  authDomain: "imsp-g2.firebaseapp.com",
-  projectId: "imsp-g2",
-  storageBucket: "imsp-g2.appspot.com",
-  messagingSenderId: "632613442760",
-  appId: "1:632613442760:web:635e3a701df122967501fd",
-  measurementId: "G-SDHKM6ZYWZ",
-};
-
-firebase.initializeApp(firebaseConfig);
 function toggleSignIn() {
   if (firebase.auth().currentUser) {
     firebase.auth().signOut();
