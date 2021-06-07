@@ -69,15 +69,6 @@ limitations under the License.
           firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
-            .then(function (user) {
-              var emailVerified = user.emailVerified;
-              if (emailVerified) {
-                alert("Welcome User");
-              } else {
-                // Email Verification sent!
-                alert("Email Verification Sent! Please Verify before Login.");
-              }
-            })
             .catch(function (error) {
               // Handle Errors here.
               var errorCode = error.code;
