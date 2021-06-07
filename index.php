@@ -14,9 +14,7 @@
               mdl-cell--12-col-tablet
               mdl-cell--8-col-desktop
             ">
-        <a href="/">
-          <h3>Firebase Authentication</h3>
-        </a>
+        <h3>Firebase Authentication</h3>
       </div>
     </div>
   </header>
