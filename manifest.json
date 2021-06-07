@@ -1,0 +1,15 @@
+{
+  "name": "Stock Management System",
+  "short_name": "SMS",
+  "description": "To manage Stocks.",
+  "lang": "en-IN",
+  "start_url": "/index.html",
+  "display": "browser",
+  "icons": [
+    {
+      "src": "icons8-in-inventory-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ]
+}

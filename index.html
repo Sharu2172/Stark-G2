@@ -1,5 +1,8 @@
 <?php require("header.php"); ?>
-<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div
+  class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header"
+  id="invoice"
+>
   <!-- Header section containing title -->
   <header
     class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700"
@@ -93,6 +96,14 @@
           >
             Send Password Reset Email
           </button>
+          &nbsp;&nbsp;&nbsp;
+          <button
+            class="mdl-button mdl-js-button mdl-button--raised"
+            id="downloadPdf"
+            name="downloadPdf"
+          >
+            Download as Pdf
+          </button>
 
           <!-- Container where we'll display the user details -->
           <div class="quickstart-user-details-container">
@@ -111,5 +122,11 @@
   window.onload = function () {
     initApp();
   };
+  document
+    .getElementById("downloadPdf")
+    .addEventListener("click", function download() {
+      const element = document.getElementById("invoice");
+      html2pdf().from(element).save();
+    });
 </script>
 <?php require("footer.php"); ?>

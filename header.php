@@ -8,7 +8,19 @@ include("config.php");
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Email/Password Authentication Example</title>
+    <meta ty>
+    <title>Stock Management System</title>
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="SMS">
+    <meta name="apple-mobile-web-app-title" content="SMS">
+    <meta name="msapplication-starturl" content="/index.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" sizes="96px" href="icons8-in-inventory-96.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="96px" href="icons8-in-inventory-96.png">
 
     <!-- Material Design Theming -->
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css" />
@@ -27,3 +39,4 @@ include("config.php");
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script type="text/javascript" src="firebase_EP.js"></script>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
