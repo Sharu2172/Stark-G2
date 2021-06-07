@@ -33,11 +33,21 @@ limitations under the License.
     <!-- Import and configure the Firebase SDK -->
     <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
     <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
-    <script src="/__/firebase/8.6.3/firebase-app.js"></script>
-    <script src="/__/firebase/8.6.3/firebase-auth.js"></script>
-    <script src="/__/firebase/init.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
 
     <script type="text/javascript">
+      var firebaseConfig = {
+        apiKey: "AIzaSyA04jtRQQ7hTXyiJP3esowPxW7tW_7EAhA",
+        authDomain: "imsp-g2.firebaseapp.com",
+        projectId: "imsp-g2",
+        storageBucket: "imsp-g2.appspot.com",
+        messagingSenderId: "632613442760",
+        appId: "1:632613442760:web:635e3a701df122967501fd",
+        measurementId: "G-SDHKM6ZYWZ",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
       /**
        * Handles the sign in button press.
        */
