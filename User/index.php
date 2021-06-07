@@ -1,22 +1,23 @@
-<?php require("header.php"); ?>
-<div
-  class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header"
-  id="invoice"
->
+<?php require("header.php");
+// if (isset($_COOKIE["uid"])) {
+//   $uid = $_COOKIE["uid"];
+//   $name = $_COOKIE["name"];
+//   $email = $_COOKIE["email"];
+//   echo $uid . $name . $email;
+//   echo "<script> console.log('Reached Cookie');</script>";
+// }
+?>
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header" id="invoice">
   <!-- Header section containing title -->
-  <header
-    class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700"
-  >
+  <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-      <div
-        class="
+      <div class="
           mdl-layout__header-row
           mdl-cell
           mdl-cell--12-col
           mdl-cell--12-col-tablet
           mdl-cell--8-col-desktop
-        "
-      >
+        ">
         <h3>Firebase Authentication</h3>
       </div>
     </div>
@@ -25,23 +26,19 @@
   <main class="mdl-layout__content mdl-color--grey-100">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
       <!-- Container for the demo -->
-      <div
-        class="
+      <div class="
           mdl-card
           mdl-shadow--2dp
           mdl-cell
           mdl-cell--12-col
           mdl-cell--12-col-tablet
           mdl-cell--12-col-desktop
-        "
-      >
-        <div
-          class="
+        ">
+        <div class="
             mdl-card__title
             mdl-color--light-blue-600
             mdl-color-text--white
-          "
-        >
+          ">
           <h2 class="mdl-card__title-text">
             Firebase Email &amp; Password Authentication
           </h2>
@@ -52,56 +49,24 @@
             account or sign up
           </p>
 
-          <input
-            class="mdl-textfield__input"
-            style="display: inline; width: auto"
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Email"
-          />
+          <input class="mdl-textfield__input" style="display: inline; width: auto" type="text" id="email" name="email" placeholder="Email" />
           &nbsp;&nbsp;&nbsp;
-          <input
-            class="mdl-textfield__input"
-            style="display: inline; width: auto"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-          />
+          <input class="mdl-textfield__input" style="display: inline; width: auto" type="password" id="password" name="password" placeholder="Password" />
           <br /><br />
-          <button
-            disabled
-            class="mdl-button mdl-js-button mdl-button--raised"
-            id="quickstart-sign-in"
-            name="signin"
-          >
+          <button disabled class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in" name="signin">
             Sign In
           </button>
           &nbsp;&nbsp;&nbsp;
 
-          <button
-            class="mdl-button mdl-js-button mdl-button--raised"
-            disabled
-            id="quickstart-verify-email"
-            name="verify-email"
-          >
+          <button class="mdl-button mdl-js-button mdl-button--raised" disabled id="quickstart-verify-email" name="verify-email">
             Send Email Verification
           </button>
           &nbsp;&nbsp;&nbsp;
-          <button
-            class="mdl-button mdl-js-button mdl-button--raised"
-            id="quickstart-password-reset"
-            name="verify-email"
-          >
+          <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-password-reset" name="verify-email">
             Send Password Reset Email
           </button>
           &nbsp;&nbsp;&nbsp;
-          <button
-            class="mdl-button mdl-js-button mdl-button--raised"
-            id="downloadPdf"
-            name="downloadPdf"
-          >
+          <button class="mdl-button mdl-js-button mdl-button--raised" id="downloadPdf" name="downloadPdf">
             Download as Pdf
           </button>
 
@@ -118,8 +83,7 @@
   </main>
 </div>
 <script type="text/javascript">
-  firebase.initializeApp(firebaseConfig);
-  window.onload = function () {
+  window.onload = function() {
     initApp();
   };
   document
@@ -129,4 +93,6 @@
       html2pdf().from(element).save();
     });
 </script>
-<?php require("footer.php"); ?>
+<?php
+require("footer.php");
+?>
