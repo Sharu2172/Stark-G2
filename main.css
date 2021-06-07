@@ -3,13 +3,7 @@ body {
   font-family: "Roboto", "Helvetica", sans-serif;
   background-color: #f5f5f5;
 }
-a {
-  text-decoration: none;
-}
-li a {
-  text-decoration: underline;
-  color: #0288d1;
-}
+
 .mdl-card {
   overflow: visible;
 }
@@ -33,14 +27,7 @@ li a {
 #quickstart-tenant-id {
   font-weight: bold;
 }
-pre {
-  overflow-x: scroll;
-  line-height: 18px;
-}
-code {
-  white-space: pre-wrap;
-  word-break: break-all;
-}
+
 h3 {
   background: url("firebase-logo.png") no-repeat;
   background-size: 40px;
