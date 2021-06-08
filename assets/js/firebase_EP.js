@@ -10,15 +10,30 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
 function SignIn() {
+  event.preventDefault();
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
+  console.log(email, password);
   if (email.length < 4) {
     alert("Please enter an email address.");
+    console.log("Please enter a new password.");
     return;
   }
   if (password.length < 4) {
-    alert("Please enter a password.");
+    alert("Please enter a new password.");
+    console.log("Please enter a new password.");
     return;
   }
   // Sign in with email and pass.
@@ -26,77 +41,98 @@ function SignIn() {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(function (userCred) {
-      var user = userCred.user;
-      var emailVerified = user.emailVerified;
-      if (!emailVerified) {
-        firebase
-          .auth()
-          .currentUser.sendEmailVerification()
-          .then(function () {
-            // Email Verification sent!
-            alert("Verification Mail Sent. Please Verify It ...");
-          });
-      }
+      $.ajax({
+        url: "set_session.php",
+        data: { role: userCred.user.email },
+      });
     })
     .catch(function (error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
-      if (errorCode === "auth/wrong-password") {
-        alert("Wrong password.");
-      } else {
-        alert(errorMessage);
+      var title = "Login Failed";
+      if (errorCode == "wrong-password") {
+        title = "Wrong Password";
+      }
+      showMessage(title, errorMessage);
+      console.log(error);
+    });
+}
+
+function SignOut() {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log("Signout");
+      document.cookie = `uid = ;`;
+      document.cookie = `name = ;`;
+      if (getCookie("remember") === "") {
+        document.cookie = `email = ;`;
+        document.cookie = `password = ;`;
       }
     });
 }
 
 function sendPasswordReset() {
-  var email = document.getElementById("email").value;
+  var email = document.getElementById("resetMail").value;
   firebase
     .auth()
     .sendPasswordResetEmail(email)
     .then(function () {
       // Password Reset Email Sent!
-      alert("Password Reset Email Sent!");
+      showMessage(
+        "Reset Mail",
+        "Password Reset Mail Has Been Sent to Your Mail ID."
+      );
     })
     .catch(function (error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
+      var title = "Reset Failed";
       if (errorCode == "auth/invalid-email") {
-        alert(errorMessage);
+        title = "Invalid Email";
       } else if (errorCode == "auth/user-not-found") {
-        alert(errorMessage);
-      } else {
-        alert(error);
+        title = "User Not Found";
       }
+      showMessage(title, errorMessage);
+      console.log(error);
     });
 }
 
 function initApp() {
-  // Listening for auth state changes.
   firebase.auth().onAuthStateChanged(function (user) {
-    document.getElementById("quickstart-verify-email").disabled = true;
     if (user) {
       // User is signed in.
-      document.cookie = `name=${user.displayName}`;
-      document.cookie = `email=${user.email}`;
-      var password = document.getElementById("password").value;
-      document.cookie = `password=${password}`;
-      document.cookie = `uid=${user.uid}`;
-    } else {
-      document.cookie = `name=`;
-      document.cookie = `email=`;
-      document.cookie = `password=`;
-      document.cookie = `uid=`;
+      var displayName = user.displayName;
+      var email = user.email;
+      var uid = user.uid;
+      var rem = document.getElementById("remember-me").checked;
+      document.cookie = `email = ${email};`;
+      document.cookie = `uid = ${uid};`;
+      document.cookie = `name = ${displayName};`;
+      console.log(getCookie("password"));
+      if (rem) {
+        console.log("Run True");
+        var password = document.getElementById("password").value;
+        var pass = window.btoa(password);
+        document.cookie = `remember = true;`;
+        document.cookie = `password = ${pass};`;
+      }
     }
   });
+}
 
-  document
-    .getElementById("sign-in")
-    .addEventListener("click", toggleSignIn, false);
+document.getElementById("sign-in").addEventListener("click", SignIn, false);
+document.getElementById("sign-out").addEventListener("click", SignOut, false);
+document
+  .getElementById("sendMail")
+  .addEventListener("click", sendPasswordReset, false);
 
-  document
-    .getElementById("password-reset")
-    .addEventListener("click", sendPasswordReset, false);
+function showMessage(Title, Body) {
+  document.getElementById("ModalLabel").textContent = Title;
+  document.getElementById("ModalBody").textContent = Body;
+  document.getElementById("showMessage").click();
+  console.log("Show Message");
 }
