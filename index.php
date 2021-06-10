@@ -1,4 +1,4 @@
-<?php include("config.php"); ?>
+<?php include("Session.php"); ?>
 <!doctype html>
 <html lang="en">
 
@@ -40,23 +40,16 @@
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control bi bi-eye" id="email" placeholder="name@example.com" value="<?php if (isset($_COOKIE["email"]) && $_COOKIE["email"] != "") {
-                                                                                                                        echo $_COOKIE["email"];
-                                                                                                                    } ?>">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
                 <label for="email">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control bi bi-alarm" id="password" placeholder="Password" value="<?php if (isset($_COOKIE["password"]) && $_COOKIE["password"] != "") {
-                                                                                                                    echo $_COOKIE['password'];
-                                                                                                                } ?>">
-                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password"> <label for=" password">Password</label>
             </div>
 
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" id="remember-me" <?php if (isset($_COOKIE["remember"]) && $_COOKIE["remember"] != "") {
-                                                                echo "checked";
-                                                            } ?>> Remember me
+                    <input type="checkbox" id="remember-me"> Remember me
                 </label>
             </div>
             <button class="w-100 btn btn-lg btn-primary" id="sign-in">Sign in</button>
@@ -87,37 +80,37 @@
                 </div>
             </div>
         </div>
-        <button type="button" id="showMessage" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#message" hidden></button>
-        <div class="modal fade" id="message" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="ModalBody">
-                    </div>
-                    <div class="modal-footer" id="ModalFooter">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="Messages"></div>
     </main>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js">
     </script>
     <script src="assets/js/firebase_EP.js"></script>
     <script type="text/javascript">
+        document.getElementById("sign-in").addEventListener("click", SignIn, false);
+        document.getElementById("sign-out").addEventListener("click", SignOut, false);
+        document
+            .getElementById("sendMail")
+            .addEventListener("click", sendPasswordReset, false);
         window.onload = function() {
-            initApp();
+            var rmCheck = document.getElementById("remember-me");
+            var email = document.getElementById("email");
+
+            if (localStorage.checkbox && localStorage.checkbox !== "") {
+                rmCheck.setAttribute("checked", "checked");
+                email.setAttribute("value", localStorage.usermail);
+            } else {
+                rmCheck.removeAttribute("checked");
+                email.value = "";
+            }
         }
-        console.log(document.cookie);
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.location.href = "User/index.php";
+            }
+        });
     </script>
-    <?php
-    echo '<script>document.writeln(sessionStorage.getItem("lastname"));</script>';
-    ?>
+
 </body>
 
 </html>

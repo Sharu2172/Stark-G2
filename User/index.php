@@ -1,11 +1,5 @@
 <?php require("header.php");
-// if (isset($_COOKIE["uid"])) {
-//   $uid = $_COOKIE["uid"];
-//   $name = $_COOKIE["name"];
-//   $email = $_COOKIE["email"];
-//   echo $uid . $name . $email;
-//   echo "<script> console.log('Reached Cookie');</script>";
-// }
+Access();
 ?>
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header" id="invoice">
   <!-- Header section containing title -->
@@ -62,7 +56,7 @@
             Send Email Verification
           </button>
           &nbsp;&nbsp;&nbsp;
-          <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-password-reset" name="verify-email">
+          <button class="mdl-button mdl-js-button mdl-button--raised" onclick="SignOut()" name="verify-email">
             Send Password Reset Email
           </button>
           &nbsp;&nbsp;&nbsp;
@@ -83,9 +77,6 @@
   </main>
 </div>
 <script type="text/javascript">
-  window.onload = function() {
-    initApp();
-  };
   document
     .getElementById("downloadPdf")
     .addEventListener("click", function download() {
