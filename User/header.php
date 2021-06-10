@@ -1,6 +1,5 @@
 <?php
 include("../config.php");
-include("../Session.php");
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +23,8 @@ include("../Session.php");
     <link rel="apple-touch-icon" type="image/png" sizes="96px" href="../assets/image/icons8-in-inventory-96.png">
 
     <!-- Material Design Theming -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
@@ -38,5 +39,5 @@ include("../Session.php");
 <body>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-    <script type="text/javascript" src="../assets/js/firebase_EP.js"></script>
+    <script type="text/javascript" src="../assets/js/firebase.js"></script>
     <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>

@@ -83,9 +83,10 @@
         <div id="Messages"></div>
     </main>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js">
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js">
     </script>
-    <script src="assets/js/firebase_EP.js"></script>
+    <script src="assets/js/firebase.js"></script>
     <script type="text/javascript">
         document.getElementById("sign-in").addEventListener("click", SignIn, false);
         document.getElementById("sign-out").addEventListener("click", SignOut, false);
@@ -106,7 +107,7 @@
         }
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                document.location.href = "User/index.php";
+                //document.location.href = "User/index.php";
             }
         });
     </script>

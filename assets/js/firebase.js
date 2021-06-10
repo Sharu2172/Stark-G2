@@ -10,6 +10,16 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+function setCookie(name, value = "", days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + value + ";" + expires + "; path=/";
+}
+
 function getCookie(name) {
   var nameEQ = name + "=";
   var ca = document.cookie.split(";");
@@ -19,6 +29,10 @@ function getCookie(name) {
     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
   }
   return null;
+}
+
+function deleteCookie(name) {
+  document.cookie = name + "=; path=/; expires=" + new Date(0).toUTCString();
 }
 
 function SignIn() {
@@ -41,17 +55,20 @@ function SignIn() {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(function (userCred) {
+      console.log(userCred);
       var user = userCred.user;
+      user.R = false;
+      console.log(user);
       var displayName = user.displayName;
       var email = user.email;
       var uid = user.uid;
       var rem = document.getElementById("remember-me");
-      document.cookie = `uid = ${uid};`;
-      document.cookie = `name = ${displayName};`;
+      setCookie("uid", uid, 4);
+      setCookie("name", displayName, 4);
       if (rem.checked && email.value !== "") {
         console.log("Run Sucessful");
+        setCookie("email", email, 4);
         localStorage.usermail = user.email;
-        document.cookie = `email = ${email};`;
         localStorage.checkbox = rem.value;
       } else {
         localStorage.usermail = "";
@@ -77,8 +94,10 @@ function SignOut() {
     .signOut()
     .then(() => {
       console.log("Signout");
-      document.cookie = `uid = ;`;
-      document.cookie = `name = ;`;
+      deleteCookie("uid");
+      deleteCookie("name");
+      deleteCookie("email");
+      location.href = "/Github/Stark-G2/";
     });
 }
 
@@ -132,5 +151,4 @@ function showMessage(Title, Body) {
   document.getElementById("ModalLabel").textContent = Title;
   document.getElementById("ModalBody").textContent = Body;
   document.getElementById("showMessage").click();
-  console.log("Show Message");
 }

@@ -76,14 +76,6 @@ Access();
     </div>
   </main>
 </div>
-<script type="text/javascript">
-  document
-    .getElementById("downloadPdf")
-    .addEventListener("click", function download() {
-      const element = document.getElementById("invoice");
-      html2pdf().from(element).save();
-    });
-</script>
 <?php
 require("footer.php");
 ?>
