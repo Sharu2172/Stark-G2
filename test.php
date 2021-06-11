@@ -1,94 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* general styling */
-
         body {
-            font-family: "Open Sans", sans-serif;
+            margin: 0;
+            font-size: larger;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        form {
-            max-width: 300px;
+        .header {
+            background-color: #f1f1f1;
+            padding: 30px;
+            text-align: center;
         }
 
-        input {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border: 1px solid #ccc;
-            border-radius: .1875rem;
-            box-sizing: border-box;
+        #navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        #navbar .a {
+            float: left;
             display: block;
-            font-size: .875rem;
-            margin-bottom: 1rem;
-            padding: .275rem;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        #navbar .b {
+            float: right;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        #navbar .a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        #navbar .a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .content {
+            padding: 16px;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
             width: 100%;
         }
 
-        input[type="checkbox"] {
-            -webkit-appearance: checkbox;
-            -moz-appearance: checkbox;
-            appearance: checkbox;
-            display: inline-block;
-            width: auto;
-        }
-
-        input[type="password"] {
-            margin-bottom: .5rem;
-        }
-
-        input[type="submit"] {
-            background-color: #015294;
-            border: none;
-            color: #fff;
-            font-size: 1rem;
-            padding: .5rem 1rem;
-        }
-
-        label {
-            color: #666;
-            font-size: .875rem;
+        .sticky+.content {
+            padding-top: 60px;
         }
     </style>
 </head>
 
 <body>
-    <form>
-        <label for="email">Email</label>
-        <input type="email" id="email">
-        <label for="pass">Password</label>
-        <input type="password">
-        <input type="checkbox" value="lsRememberMe" id="rememberMe"> <label for="rememberMe">Remember me</label>
-        <input type="submit" value="Login" onclick="lsRememberMe()">
-    </form>
+
+    <div class="header">
+        <h2>Scroll Down</h2>
+        <p>Scroll down to see the sticky effect.</p>
+    </div>
+
+    <div id="navbar">
+        <button type="button" id="sidebarCollapse" class="btn btn-info a">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+        <form class="d-flex b" action="" method="POST">
+            <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" name='trial' type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="content">
+        <h3>Sticky Navigation Example</h3>
+        <p>The navbar will stick to the top when you reach its scroll position.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    </div>
+
     <script>
-        const rmCheck = document.getElementById("rememberMe"),
-            emailInput = document.getElementById("email");
+        window.onscroll = function() {
+            myFunction()
+        };
 
-        if (localStorage.checkbox && localStorage.checkbox !== "") {
-            rmCheck.setAttribute("checked", "checked");
-            emailInput.value = localStorage.username;
-        } else {
-            rmCheck.removeAttribute("checked");
-            emailInput.value = "";
-        }
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
 
-        function lsRememberMe() {
-            if (rmCheck.checked && emailInput.value !== "") {
-                localStorage.username = emailInput.value;
-                localStorage.checkbox = rmCheck.value;
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
             } else {
-                localStorage.username = "";
-                localStorage.checkbox = "";
+                navbar.classList.remove("sticky");
             }
         }
     </script>
+
 </body>
 
 </html>
