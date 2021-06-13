@@ -10,5 +10,5 @@ $conn = mysqli_connect($host, $user, $pass, $name); //host_name,username,passwor
 if (!$conn) {
     echo "<script>console.log('Connection Failed'); </script>";
 } else {
-    echo modal("sucess", "empty", "Connection Sucessful", "blank");
+    echo "<script>console.log('Connection Sucessful'); </script>";
 }

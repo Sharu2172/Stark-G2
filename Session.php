@@ -22,7 +22,7 @@ function Access()
         echo "<script type='text/javascript'>
     alert('Please Login to Access This Page.');
 </script>";
-        echo location("../");
+        echo location("../../");
     }
 }
 

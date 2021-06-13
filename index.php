@@ -53,8 +53,7 @@
                 </label>
             </div>
             <button class="w-100 btn btn-lg btn-primary" id="sign-in">Sign in</button>
-            <p class="mt-5 mb-3"><a id="sign-out">Sign Out</a></p>
-            <p class="mb-1"><a data-bs-toggle="modal" data-bs-target="#resetModal">Forgot Password</a></p>
+            <p class="mt-5 mb-3"><a data-bs-toggle="modal" data-bs-target="#resetModal">Forgot Password</a></p>
         </form>
 
         <!-- Modal -->
@@ -67,9 +66,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-floating">
-                            <input type="email" class="form-control" id="resetMail" placeholder="name@example.com" value="<?php if ($_COOKIE["email"] != "") {
-                                                                                                                                echo $_COOKIE["email"];
-                                                                                                                            } ?>">
+                            <input type="email" class="form-control" id="resetMail" placeholder="name@example.com" value="">
                             <label for="resetMail">Email address</label>
                         </div>
                     </div>
@@ -89,25 +86,27 @@
     <script src="assets/js/firebase.js"></script>
     <script type="text/javascript">
         document.getElementById("sign-in").addEventListener("click", SignIn, false);
-        document.getElementById("sign-out").addEventListener("click", SignOut, false);
         document
             .getElementById("sendMail")
             .addEventListener("click", sendPasswordReset, false);
         window.onload = function() {
             var rmCheck = document.getElementById("remember-me");
             var email = document.getElementById("email");
+            var rmail = document.getElementById("resetMail");
 
             if (localStorage.checkbox && localStorage.checkbox !== "") {
                 rmCheck.setAttribute("checked", "checked");
                 email.setAttribute("value", localStorage.usermail);
+                rmail.setAttribute("value", localStorage.usermail);
             } else {
                 rmCheck.removeAttribute("checked");
                 email.value = "";
+                rmail.value = "";
             }
         }
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                //document.location.href = "User/index.php";
+                document.location.href = "User/dashboard/";
             }
         });
     </script>
