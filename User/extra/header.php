@@ -1,5 +1,6 @@
 <?php
 include("../../config.php");
+Access();
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,12 +32,12 @@ include("../../config.php");
                 </a>
             </div>
             <div class="d-flex align-items-center">
-                <form class="w-100 me-3">
-                    <input type="search" class="form-control" placeholder="Search...">
+                <form class="w-100 me-3 submit_on_enter" method="POST" action="../search/index.php">
+                    <input type="search" class="form-control" id="search" name="search" placeholder="Search...">
                 </form>
                 <div class="flex-shrink-0 dropdown">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://via.placeholder.com/28?text=USER" alt="user" width="32" height="32" class="rounded-circle">
+                        <img src="https://via.placeholder.com/30?text=USER" alt="user" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="z-index: 2;">
                         <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -53,9 +54,8 @@ include("../../config.php");
     </header>
     <main class="container-fluid pb-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
         <div class="row flex-grow-sm-1 flex-grow-0">
-            <div class="col-sm-3 flex-grow-sm-1 flex-shrink-1 flex-grow-0 sticky-top pb-sm-0 pb-3" style="z-index: 1;">
+            <div class="col-sm-3 flex-grow-sm-1 flex-shrink-1 flex-grow-0 sticky-top pb-sm-0 pb-2" style="z-index: 1;">
                 <div class="bg-light border rounded-3 p-1 h-100 sticky-top">
-                    <h6 class="d-none d-sm-block text-muted">Sticky Sidebar</h6>
                     <ul class="nav nav-pills flex-sm-column flex-row mb-auto justify-content-between text-truncate">
                         <li class="nav-item">
                             <a href="#" class="nav-link px-2 text-truncate">

@@ -97,7 +97,7 @@ function SignOut() {
       deleteCookie("uid");
       deleteCookie("name");
       deleteCookie("email");
-      location.href = "/Github/Stark-G2/";
+      location.href = "../../";
     });
 }
 

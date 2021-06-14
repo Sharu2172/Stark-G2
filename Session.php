@@ -55,3 +55,5 @@ function modal($mid, $title, $body, $buttonid, $button = '')
     $total = $start . $submit . $end;
     return $total;
 }
+
+
