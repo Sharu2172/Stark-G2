@@ -8,7 +8,7 @@ if (isset($_POST['uid'])) {
     $cost = $_POST["cost"];
     $amount = $cost * $quantity;
 
-    $sql = "INSERT INTO transaction(uid, pid, quantity, cost) VALUES ('$uid', '$pid', '$quantity', '$amount')";
+    $sql = "INSERT INTO transaction(uid, pid, quantity, total) VALUES ('$uid', '$pid', '$quantity', '$amount')";
     $result = $conn->query($sql);
     if ($result) {
         echo "<script type='text/javascript'>alert('Transaction Sucessful');</script>";

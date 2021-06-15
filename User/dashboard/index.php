@@ -1,7 +1,12 @@
 <?php
 include("../extra/header.php");
-if ($result = $conn->query("SHOW TABLES LIKE '" . $_COOKIE["uid"] . "'")) {
-    if (!$result->num_rows == 1) {
+$result = $conn->query("SELECT COUNT(1) FROM user WHERE uid = '" . $_COOKIE["uid"] . "'");
+$row = mysqli_fetch_row($result);
+if ($row[0] < 1) {
+    $name = time();
+    $qry = "INSERT INTO user VALUES ('$_COOKIE[uid]',$name,CURRENT_DATE,'Male','','$_COOKIE[email]','','')";
+    if (mysqli_query($conn, $qry)) {
+        echo location("../profile/index.php");
     }
 }
 ?>

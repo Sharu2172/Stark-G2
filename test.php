@@ -1,1 +1,0 @@
-SELECT * FROM `transaction` WHERE date(timestamp) = '2021-06-14'
