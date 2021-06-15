@@ -1,8 +1,6 @@
-<!--
-    This File is to edit current admin data Using Update Query.    
--->
+
 <?php
-include('../../dbcon.php');
+include('../../config.php');
 
 //To allow only admin's to access this page
 echo Access();
@@ -10,48 +8,35 @@ echo Access();
 //Store POST array to variables
 $name = $_POST['name'];
 $email = $_POST['email'];
-$mobile = $_POST['ph_no'];
-date_default_timezone_set("Asia/Kolkata");   //India time (GMT+5:30)
-$today = date("Y-m-d H:i:s");
+$ph_no = $_POST['ph_no'];
+$dob = date($_POST['dob']);
+$gender = $_POST['gender'];
+$address = $_POST['address'];
 
-$oldqry = "SELECT admin_image FROM Admin WHERE uid='$_SESSION[uid]'";
+$oldqry = "SELECT image FROM user WHERE uid='$_COOKIE[uid]'";
 $qry_run121 = mysqli_query($conn, $oldqry);
 $olddata = mysqli_fetch_assoc($qry_run121);
 
 //To check if Admin Image is selected to update
-if (empty($_FILES['admin_image']['tmp_name']) || !is_uploaded_file($_FILES['admin_image']['tmp_name'])) {
-    //To check if password is set for update
-    if (empty($_POST['password'])) {
-        $query = "UPDATE Admin SET name='$name',email='$email',mobile='$mobile',login_time='$today' WHERE uid = '$_SESSION[uid]'";
-    } else {
-        $query = "UPDATE Admin SET password='$pass',name='$name',email='$email',mobile='$mobile',login_time='$today' WHERE uid = '$_SESSION[uid]'";
-        $log = 1;
-    }
+if (empty($_FILES['image']['tmp_name']) || !is_uploaded_file($_FILES['image']['tmp_name'])) {
+    //To check if password is set for update...
+    $query = "UPDATE user SET uname='$uname',dob='$dob',gender='$gender',ph_no='$ph_no',email='$email',address='$address' WHERE uid='$_COOKIE[uid]'";
 } else {
-    $temp = explode(".", $_FILES["admin_image"]["name"]);
-    $admin_image = round(microtime(true)) . '.' . end($temp);
-
-    if (empty($_POST['password'])) {
-        $query = "UPDATE Admin SET name='$name',admin_image='$admin_image',email='$email',mobile='$mobile',login_time='$today' WHERE uid = '$_SESSION[uid]'";
-    } else {
-        $query = "UPDATE Admin SET password='$pass',name='$name',admin_image='$admin_image',email='$email',mobile='$mobile',login_time='$today' WHERE uid = '$_SESSION[uid]'";
-        $log = 1;
-    }
-    move_uploaded_file($_FILES["admin_image"]["tmp_name"], "../upload/" . $admin_image);
-    if (!empty($olddata['admin_image'])) {
-        unlink('../upload/' . $olddata['admin_image']);
+    $temp = explode(".", $_FILES["image"]["name"]);
+    $image = round(microtime(true)) . '.' . end($temp);
+    $query = "UPDATE user SET uname='$name',dob='$dob',gender='$gender',ph_no='$ph_no',email='$email',address='$address',image='$image' WHERE uid='$_COOKIE[uid]'";
+    move_uploaded_file($_FILES["image"]["tmp_name"], "../../images/" . $image);
+    if (!empty($olddata['image'])) {
+        unlink('../../images/' . $olddata['image']);
     }
 }
 
 //to check if Query is Run sucessfully
 if ($conn->query($query)) {
-    echo "<script type='text/javascript'>alert('Admin data Edited Sucessfully.');</script>";
-    if ($log == 1) {
-        session_destroy();
-    }
-    echo location("../dashboard/");
+    echo "<script type='text/javascript'>alert('User Detaails Edited Sucessfully.');</script>";
+    //echo location("../dashboard/index.php");
 } else {
-    echo "<script type='text/javascript'>alert('Cannot Add Admin data.');</script>";
-    echo location("../admin/");
+    echo "<script type='text/javascript'>alert('Cannot Update User Details.');</script>";
+    //echo location("index.php");
 }
 ?>

@@ -65,18 +65,18 @@ $row = mysqli_fetch_assoc($query_run)
                 </div>
             </fieldset>
             <br>
-            <button type="button" class="btn btn-success btn-outline-light" data-toggle="modal" data-target="#edit-details">
+            <button type="button" class="btn btn-success btn-outline-light" data-bs-toggle="modal" data-bs-target="#edit-details">
                 Edit Details
             </button>
         </div>
         <!-- This modal display's form for editing Admin Data. -->
-        <div class="modal fade" id="edit-details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade" id="edit-details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Admin Details</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title">Edit Admin Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='$("#edit-details").modal("hide");'>
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -84,44 +84,44 @@ $row = mysqli_fetch_assoc($query_run)
                     <form action='profile.php' method='POST' enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="inputimage" class="col-sm-5 col-form-label"><b>User Image : </b></label>
+                                <label for="updateimage" class="col-sm-5 col-form-label"><b>User Image : </b></label>
                                 <div class="col-sm-5">
-                                    <input type="file" class="form-control" name="image" id="inputimage">
+                                    <input type="file" class="form-control" name="image" id="updateimage">
                                 </div>
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label for="inputname" class="col-sm-5 col-form-label"><b>User Name : </b></label>
+                                <label for="updatename" class="col-sm-5 col-form-label"><b>User Name : </b></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="inputname" name='name' value="<?php echo $row['uname']; ?>" required>
+                                    <input type="text" class="form-control" id="updatename" name='name' value="<?php echo $row['uname']; ?>" required>
                                 </div>
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label for="inputemail" class="col-sm-5 col-form-label"><b>Email</b></label>
+                                <label for="updateemail" class="col-sm-5 col-form-label"><b>Email</b></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="inputemail" required name="email" value="<?php echo $row['email']; ?>" title=" please enter a valid email address" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" oninput="if (typeof this.reportValidity === 'function') {this.reportValidity();}" id="inputemail">
+                                    <input type="text" class="form-control" id="updateemail" required name="email" value="<?php echo $row['email']; ?>" title=" please enter a valid email address" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" oninput="if (typeof this.reportValidity === 'function') {this.reportValidity();}" id="inputemail">
                                 </div>
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label for="inputph" class="col-sm-5 col-form-label"><b>Phone Number : </b></label>
+                                <label for="updateph" class="col-sm-5 col-form-label"><b>Phone Number : </b></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" required id="inputph" name="ph_no" value="<?php echo $row['ph_no']; ?>" title="Please enter a valid Phone Number." pattern="^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$" oninput="if (typeof this.reportValidity === 'function') {this.reportValidity();}" id="inputph">
+                                    <input type="text" class="form-control" required id="updateph" name="ph_no" value="<?php echo $row['ph_no']; ?>" title="Please enter a valid Phone Number." pattern="^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$" oninput="if (typeof this.reportValidity === 'function') {this.reportValidity();}" id="inputph">
                                 </div>
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label for="inputdob" class="col-sm-5 col-form-label"><b>Date of Birth : </b></label>
+                                <label for="updatedob" class="col-sm-5 col-form-label"><b>Date of Birth : </b></label>
                                 <div class="col-sm-5">
-                                    <input type="date" class="form-control" required id="inputdob" name="dob" value="<?php echo $row['dob']; ?>" title="Please enter a valid Phone Number." pattern="^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$" oninput="if (typeof this.reportValidity === 'function') {this.reportValidity();}" id="inputph">
+                                    <input type="date" class="form-control" required id="updatedob" name="dob" value="<?php echo $row['dob']; ?>" title="Please enter a valid Phone Number." pattern="^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$" oninput="if (typeof this.reportValidity === 'function') {this.reportValidity();}" id="inputph">
                                 </div>
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label for="inputgn" class="col-sm-5 col-form-label"><b>Gender : </b></label>
+                                <label for="updategn" class="col-sm-5 col-form-label"><b>Gender : </b></label>
                                 <div class="col-sm-5">
-                                    <select class="form-select" id="inputgn" name="gender">
+                                    <select class="form-select" id="updategn" name="gender">
                                         <option selected value="<?php echo $row['gender']; ?>"><?php echo $row['gender']; ?></option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -131,18 +131,38 @@ $row = mysqli_fetch_assoc($query_run)
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label for="inputadd" class="col-sm-5 col-form-label"><b>Address : </b></label>
+                                <label for="updateadd" class="col-sm-5 col-form-label"><b>Address : </b></label>
                                 <div class="col-sm-5">
-                                    <textarea class="form-control" id="inputadd" name="address" rows="3"><?php echo $row["address"]; ?></textarea>
+                                    <textarea class="form-control" id="updateadd" name="address" rows="3"><?php echo $row["address"]; ?></textarea>
                                 </div>
                             </div>
                         </div>
                         <!-- Modal Footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
-                            <button type="submit" class="btn btn-outline-primary"> Submit </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='$("#edit-details").modal("hide");'> Close </button>
+                            <button type=" submit" class="btn btn-outline-primary"> Submit </button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
