@@ -18,7 +18,7 @@ function location($page, $name1 = "", $value1 = "", $name2 = "", $value2 = "")
 //Function to only allow user's to access specific files using session array.
 function Access()
 {
-    if (!isset($_COOKIE["uid"]) || $_COOKIE["uid"] === "") {
+    if (!isset($_SESSION["uid"]) || $_SESSION["uid"] === "") {
         echo "<script type='text/javascript'>
     alert('Please Login to Access This Page.');
 </script>";
@@ -55,5 +55,3 @@ function modal($mid, $title, $body, $buttonid, $button = '')
     $total = $start . $submit . $end;
     return $total;
 }
-
-

@@ -1,14 +1,6 @@
 <?php
 include("../extra/header.php");
-$result = $conn->query("SELECT COUNT(1) FROM user WHERE uid = '" . $_COOKIE["uid"] . "'");
-$row = mysqli_fetch_row($result);
-if ($row[0] < 1) {
-    $name = time();
-    $qry = "INSERT INTO user VALUES ('$_COOKIE[uid]',$name,CURRENT_DATE,'Male','','$_COOKIE[email]','','')";
-    if (mysqli_query($conn, $qry)) {
-        echo location("../profile/index.php");
-    }
-}
+
 ?>
 <main class="col-md-auto ms-sm-auto col-lg-auto px-md-4">
     <center>
@@ -24,7 +16,13 @@ if ($row[0] < 1) {
             ?>
                 <div class="col-sm-3">
                     <div class="card">
-                        <img src="../../images/W3.jpg" class="card-img-top" alt="...">
+                        <?php
+                        if ($row['pimage'] == "" || !file_exists('../../assets/image/product/' . $row["pimage"])) {
+                            echo "<img src='https://via.placeholder.com/1080' class='card-img-top' width=150px height=150px>";
+                        } else {
+                            echo "<img src='../../assets/image/product/" . $row['pimage'] . "' class='card-img-top'>";
+                        }
+                        ?>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Product : <?php echo $row['product']; ?></li>
                             <li class="list-group-item">Brand : <?php echo $row['brand']; ?></li>

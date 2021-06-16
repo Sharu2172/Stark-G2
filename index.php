@@ -13,7 +13,6 @@
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="assets/vendor/jquery/jquery-3.6.0.js"></script>
-    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
 
     <link href="assets/css/login.css" rel="stylesheet">
     <style>
@@ -106,7 +105,25 @@
         }
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                document.location.href = "User/dashboard/";
+                $.ajax({
+                    url: "User/extra/Store.php",
+                    type: "post",
+                    data: {
+                        function: "store",
+                        uid: user.uid,
+                        email: user.email
+                    },
+                    success: function(status) {
+                        console.log(status);
+                        if (status === "sucess") {
+                            document.location.href = "User/dashboard/";
+                        }
+                    },
+                    error: function(xhr, desc, err) {
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError:" + err);
+                    },
+                });
             }
         });
     </script>

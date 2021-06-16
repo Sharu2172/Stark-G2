@@ -10,7 +10,7 @@ Access();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title><?php echo $_COOKIE["name"]; ?></title>
+    <title><?php echo $_SESSION["name"]; ?></title>
 
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
@@ -30,9 +30,13 @@ Access();
             <div>
                 <div class="flex-shrink-0 dropdown">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span style="font-size: 36px;">
-                            <i class="fas fa-user-circle"></i>
-                        </span>
+                        <?php if (empty($_SESSION['image']) || !file_exists('../../assets/image/user/' . $_SESSION['image'])) { ?>
+                            <span style="font-size: 36px;">
+                                <i class="fas fa-user-circle"></i>
+                            </span>
+                        <?php } else {
+                            echo "<img src='../../assets/image/user/" . $_SESSION['image'] . "' class='rounded-circle' width='40' height='40'>";
+                        } ?>
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="z-index: 2;">
                         <li>

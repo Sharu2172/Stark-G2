@@ -35,15 +35,15 @@
             <?php
             // This query is used for reading student data from database.
             if (isset($_POST["date"])) {
-                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_COOKIE[uid]' AND date(timestamp) = '$_POST[date]'";
+                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_SESSION[uid]' AND date(timestamp) = '$_POST[date]'";
             } else if (isset($_POST["month"])) {
                 $month = substr($_POST["month"], 5, 6);
                 $year = substr($_POST["month"], 0, 4);
-                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_COOKIE[uid]' AND month(timestamp) = '$month' AND year(timestamp) = '$year'";
+                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_SESSION[uid]' AND month(timestamp) = '$month' AND year(timestamp) = '$year'";
             } else if (isset($_POST["year"])) {
-                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_COOKIE[uid]' AND year(timestamp) = '$_POST[year]'";
+                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_SESSION[uid]' AND year(timestamp) = '$_POST[year]'";
             } else {
-                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_COOKIE[uid]'";
+                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_SESSION[uid]'";
             }
             $query_run = mysqli_query($conn, $query);
             $count = 1;

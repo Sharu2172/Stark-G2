@@ -57,17 +57,8 @@ function SignIn() {
     .then(function (userCred) {
       console.log(userCred);
       var user = userCred.user;
-      user.R = false;
-      console.log(user);
-      var displayName = user.displayName;
-      var email = user.email;
-      var uid = user.uid;
       var rem = document.getElementById("remember-me");
-      setCookie("uid", uid, 4);
-      setCookie("name", displayName, 4);
       if (rem.checked && email.value !== "") {
-        console.log("Run Sucessful");
-        setCookie("email", email, 4);
         localStorage.usermail = user.email;
         localStorage.checkbox = rem.value;
       } else {
@@ -93,11 +84,20 @@ function SignOut() {
     .auth()
     .signOut()
     .then(() => {
-      console.log("Signout");
-      deleteCookie("uid");
-      deleteCookie("name");
-      deleteCookie("email");
-      location.href = "../../";
+      $.ajax({
+        url: "../extra/Store.php",
+        type: "post",
+        data: { function: "delete" },
+        success: function (status) {
+          if (status === "sucess") {
+            document.location.href = "../../";
+          }
+        },
+        error: function (xhr, desc, err) {
+          console.log(xhr);
+          console.log("Details: " + desc + "\nError:" + err);
+        },
+      }); // end ajax call
     });
 }
 

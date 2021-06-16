@@ -1,6 +1,6 @@
 <?php
 require("../extra/header.php");
-$query = "SELECT * FROM user where uid = '$_COOKIE[uid]'";
+$query = "SELECT * FROM user where uid = '$_SESSION[uid]'";
 $query_run = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($query_run)
 ?>
@@ -13,10 +13,10 @@ $row = mysqli_fetch_assoc($query_run)
                 <div class="form-group">
                     <div class="thumbnail">
                         <?php
-                        if ($row['image'] == "") {
+                        if (!isset($row['image']) || ($row['image'] == "" || !file_exists('../../assets/image/user/' . $row['image']))) {
                             echo "<img src='https://via.placeholder.com/500' class='img-thumbnail' width=150px height=150px>";
                         } else {
-                            echo "<img src='../../images/" . $row['image'] . "' class='img-thumbnail' style='width:20%'>";
+                            echo "<img src='../../assets/image/user/" . $row['image'] . "' class='img-thumbnail' style='width:20%'>";
                         }
                         ?>
                     </div>
@@ -25,7 +25,9 @@ $row = mysqli_fetch_assoc($query_run)
                 <div class="form-group row">
                     <label for="inputname" class="col-sm-5 col-form-label"><b>User Name</b></label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="inputname" value="<?php echo $row['uname']; ?>">
+                        <input type="text" class="form-control" id="inputname" value="<?php if (isset($row['uname'])) {
+                                                                                            echo $row['uname'];
+                                                                                        } ?>">
                     </div>
                 </div>
                 <br>
@@ -75,7 +77,7 @@ $row = mysqli_fetch_assoc($query_run)
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Admin Details</h5>
+                        <h5 class="modal-title">User Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='$("#edit-details").modal("hide");'>
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -94,13 +96,6 @@ $row = mysqli_fetch_assoc($query_run)
                                 <label for="updatename" class="col-sm-5 col-form-label"><b>User Name : </b></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="updatename" name='name' value="<?php echo $row['uname']; ?>" required>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group row">
-                                <label for="updateemail" class="col-sm-5 col-form-label"><b>Email</b></label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="updateemail" required name="email" value="<?php echo $row['email']; ?>" title=" please enter a valid email address" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" oninput="if (typeof this.reportValidity === 'function') {this.reportValidity();}" id="inputemail">
                                 </div>
                             </div>
                             <br>
@@ -143,26 +138,6 @@ $row = mysqli_fetch_assoc($query_run)
                             <button type=" submit" class="btn btn-outline-primary"> Submit </button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
                 </div>
             </div>
         </div>

@@ -8,47 +8,53 @@ if (!empty($_POST['search'])) {
         $query = "SELECT * FROM stocks WHERE product LIKE '%$pid%' ORDER BY brand ASC";
     }
     $query_run = mysqli_query($conn, $query);
-    if ($query_run->num_rows > 1) {
-        while ($row = mysqli_fetch_assoc($query_run)) {
-?>
-            <main class="col-md-auto ms-sm-auto col-lg-auto px-md-4">
-                <center>
-                    <h2>Products</h2>
-                </center>
-                <form action="../search/index.php" method='POST'>
-                    <div class="row">
-                        <?php
-                        // This query is used for reading student data from database.
-                        $query = "SELECT * FROM `stocks` ORDER BY 'product' ASC;";
-                        $query_run = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_assoc($query_run)) {
-                        ?>
-                            <div class="col-sm-3">
-                                <div class="card">
-                                    <img src="../../images/W3.jpg" class="card-img-top" alt="...">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Product : <?php echo $row['product']; ?></li>
-                                        <li class="list-group-item">Brand : <?php echo $row['brand']; ?></li>
-                                        <li class="list-group-item">Price : <?php echo $row["cost"]; ?></li>
-                                    </ul>
-                                    <button name="search" id="search" type="submit" class="btn btn-primary" value="<?php echo $row['pid']; ?>"> Go somewhere</button>
-                                </div>
+    if ($query_run->num_rows > 1) { ?>
+        <center>
+            <h2>Products</h2>
+        </center>
+        <main class="col-md-auto ms-sm-auto col-lg-auto px-md-4">
+            <form action="../search/index.php" method='POST'>
+                <div class="row">
+                    <?php
+                    while ($row = mysqli_fetch_assoc($query_run)) {
+                    ?>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <?php
+                                if ($row['pimage'] == "" || !file_exists('../../assets/image/product/' . $row["pimage"])) {
+                                    echo "<img src='https://via.placeholder.com/1080' class='card-img-top' width=150px height=150px>";
+                                } else {
+                                    echo "<img src='../../assets/image/product/" . $row['pimage'] . "' class='card-img-top'>";
+                                }
+                                ?>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Product : <?php echo $row['product']; ?></li>
+                                    <li class="list-group-item">Brand : <?php echo $row['brand']; ?></li>
+                                    <li class="list-group-item">Price : <?php echo $row["cost"]; ?></li>
+                                </ul>
+                                <button name="search" id="search" type="submit" class="btn btn-primary" value="<?php echo $row['pid']; ?>"> Go somewhere</button>
                             </div>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                </form>
-            </main>
-        <?php
-        }
-    } elseif ($query_run->num_rows == 1) {
+                        </div>
+                    <?php } ?>
+                </div>
+            </form>
+        </main>
+    <?php } else if ($query_run->num_rows == 1) {
         $row = mysqli_fetch_assoc($query_run);
-        ?>
+    ?>
+        <center>
+            <h3><u><?php echo $row["product"]; ?></u></h3>
+        </center>
         <main class="col-md-auto ms-sm-auto col-lg-auto px-md-4">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="../../images/W3.jpg" class="d-block w-75" alt="../W3.jpg">
+                    <?php
+                    if ($row['pimage'] == "" || !file_exists('../../assets/image/product/' . $row["pimage"])) {
+                        echo "<img src='https://via.placeholder.com/150' class='d-block w-50'>";
+                    } else {
+                        echo "<img src='../../assets/image/product/" . $row['pimage'] . "' class='d-block w-75'>";
+                    }
+                    ?>
                 </div>
             </div>
             <hr class=" dropdown-divider">
@@ -59,7 +65,7 @@ if (!empty($_POST['search'])) {
             </div>
             <hr class=" dropdown-divider">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-cart">
-                Launch demo modal
+                Purchase
             </button>
         </main>
         <div class="modal fade" id="add-cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -80,7 +86,7 @@ if (!empty($_POST['search'])) {
                             <input type="text" id="quantity" name="quantity" placeholder="Enter Qantity" required>
                             <br>
                             <input type="text" id="pid" name="pid" value='<?php echo $row['pid'] ?>' hidden>
-                            <input type="text" id="uid" name="uid" value='<?php echo $_COOKIE['uid'] ?>' hidden>
+                            <input type="text" id="uid" name="uid" value='<?php echo $_SESSION['uid'] ?>' hidden>
                             <input type="text" id="cost" name="cost" value='<?php echo $row['cost'] ?>' hidden>
                         </div>
                         <!-- Modal Footer -->
