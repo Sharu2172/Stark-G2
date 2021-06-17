@@ -28,7 +28,7 @@ if (!empty($_POST['search'])) {
                                 }
                                 ?>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Product : <?php echo $row['product']; ?></li>
+                                    <li class="list-group-item">Product : <?php echo $row['pname']; ?></li>
                                     <li class="list-group-item">Brand : <?php echo $row['brand']; ?></li>
                                     <li class="list-group-item">Price : <?php echo $row["cost"]; ?></li>
                                 </ul>
@@ -43,7 +43,7 @@ if (!empty($_POST['search'])) {
         $row = mysqli_fetch_assoc($query_run);
     ?>
         <center>
-            <h3><u><?php echo $row["product"]; ?></u></h3>
+            <h3><u><?php echo $row["pname"]; ?></u></h3>
         </center>
         <main class="col-md-auto ms-sm-auto col-lg-auto px-md-4">
             <div class="carousel-inner">
@@ -59,7 +59,7 @@ if (!empty($_POST['search'])) {
             </div>
             <hr class=" dropdown-divider">
             <div class="container">
-                <h2 class=" text-center"><u><?php echo $row['product'] ?></u></h2>
+                <h2 class=" text-center"><u><?php echo $row['pname'] ?></u></h2>
                 <br>
                 <?php echo $row["Description"] ?>
             </div>
@@ -85,7 +85,7 @@ if (!empty($_POST['search'])) {
                     <!-- Modal Body -->
                     <form action='../extra/add.php' method='post' enctype="multipart/form-data">
                         <div class="modal-body">
-                            Product : <?php echo $row['product'] ?>
+                            Product : <?php echo $row['pname'] ?>
                             <br>
                             Avilable Quantity : <?php echo $row['no'] ?>
                             <br>

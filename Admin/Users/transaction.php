@@ -36,15 +36,15 @@
             <?php
             // This query is used for reading student data from database.
             if (isset($_POST["date"])) {
-                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_POST[uid]' AND date(timestamp) = '$_POST[date]'";
+                $query = "SELECT T.uid , S.pname , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_POST[uid]' AND date(timestamp) = '$_POST[date]'";
             } else if (isset($_POST["month"])) {
                 $month = substr($_POST["month"], 5, 6);
                 $year = substr($_POST["month"], 0, 4);
-                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_POST[uid]' AND month(timestamp) = '$month' AND year(timestamp) = '$year'";
+                $query = "SELECT T.uid , S.pname , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_POST[uid]' AND month(timestamp) = '$month' AND year(timestamp) = '$year'";
             } else if (isset($_POST["year"])) {
-                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_POST[uid]' AND year(timestamp) = '$_POST[year]'";
+                $query = "SELECT T.uid , S.pname , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_POST[uid]' AND year(timestamp) = '$_POST[year]'";
             } else {
-                $query = "SELECT T.uid , S.product , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_POST[uid]'";
+                $query = "SELECT T.uid , S.pname , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S WHERE T.pid=S.pid AND T.uid = '$_POST[uid]'";
             }
             $query_run = mysqli_query($conn, $query);
             $count = 1;
@@ -53,7 +53,7 @@
                 <tr>
                     <th scope="row"> <?php echo $count;
                                         $count++; ?> </th>
-                    <td> <?php echo $row['product']; ?> </td>
+                    <td> <?php echo $row['pname']; ?> </td>
                     <td> <?php echo $row['brand']; ?> </td>
                     <td> <?php echo $row["quantity"]; ?> </td>
                     <td> <?php echo $row['cost']; ?> </td>

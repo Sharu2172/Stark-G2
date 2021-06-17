@@ -24,7 +24,7 @@ include("../extra/header.php");
                         }
                         ?>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Product : <?php echo $row['product']; ?></li>
+                            <li class="list-group-item">Product : <?php echo $row['pname']; ?></li>
                             <li class="list-group-item">Brand : <?php echo $row['brand']; ?></li>
                             <li class="list-group-item">Price : <?php echo $row["cost"]; ?></li>
                         </ul>

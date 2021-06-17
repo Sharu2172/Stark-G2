@@ -49,6 +49,18 @@ AAccess();
                             <hr class="dropdown-divider">
                         </li>
                         <li>
+                            <button type="button" class="dropdown-item px-2" data-bs-toggle="modal" data-bs-target="#add-product">
+                                <i class="fas fa-plus"></i>
+                                <span>Add Product</span>
+                            </button>
+                            <a href="../Transaction/" class="dropdown-item px-2">
+
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
                             <a href="../Transaction/" class="dropdown-item px-2">
                                 <i class="fas fa-list"></i>
                                 <span>Transactions</span>
