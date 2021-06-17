@@ -53,9 +53,6 @@ AAccess();
                                 <i class="fas fa-plus"></i>
                                 <span>Add Product</span>
                             </button>
-                            <a href="../Transaction/" class="dropdown-item px-2">
-
-                            </a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -70,7 +67,16 @@ AAccess();
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="../Users/index.php">
+                            <button type="button" class="dropdown-item px-2" data-bs-toggle="modal" data-bs-target="#add-user">
+                                <i class="fas fa-user"></i>
+                                <span>Add User</span>
+                            </button>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item px-2" href="../Users/index.php">
                                 <i class="fas fa-user"></i>
                                 <span>Users</span>
                             </a>

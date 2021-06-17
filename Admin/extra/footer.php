@@ -1,4 +1,5 @@
             </div>
+            <div id="Messages"></div>
             </main>
             <div class="modal fade" id="add-product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -64,17 +65,51 @@
                     </div>
                 </div>
             </div>
-            <script>
-                $(document).ready(function() {
-                    $('.submit_on_enter').keydown(function(event) {
-                        // enter has keyCode = 13, change it if you want to use another button
-                        if (event.keyCode == 13) {
-                            this.form.submit();
-                            return false;
-                        }
+            <div class="modal fade" id="add-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create User</h5>
+                            <button type="button" class="close bg-transparent border-0" data-dismiss="modal" aria-label="Close" onclick='$("#add-user").modal("hide");'>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-5 col-form-label"><b>Email : </b></label>
+                                <div class="col-sm-5 input-group">
+                                    <input type="text" class="form-control" id="cuemail" required>
+                                </div>
+                            </div>
+                            <br>
+                            <!-- Modal Footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='$("#add-user").modal("hide");'> Close </button>
+                                <button type="button" class="btn btn-outline-primary" onclick='$("#add-user").modal("hide"); CreateUser();'> Submit </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function() {
+                        $('.submit_on_enter').keydown(function(event) {
+                            // enter has keyCode = 13, change it if you want to use another button
+                            if (event.keyCode == 13) {
+                                this.form.submit();
+                                return false;
+                            }
+                        });
                     });
-                });
-            </script>
-            </body>
 
-            </html>
+                    document.getElementById('togglePassword').addEventListener('click', function(e) {
+                        const password = document.getElementById('password');
+                        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                        password.setAttribute('type', type);
+                        this.classList.toggle('fa-eye-slash');
+                    });
+                </script>
+                </body>
+
+                </html>

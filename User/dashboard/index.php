@@ -27,6 +27,7 @@ include("../extra/header.php");
                             <li class="list-group-item">Product : <?php echo $row['pname']; ?></li>
                             <li class="list-group-item">Brand : <?php echo $row['brand']; ?></li>
                             <li class="list-group-item">Price : <?php echo $row["cost"]; ?></li>
+                            <li class="list-group-item">Quantity : <?php echo $row["no"]; ?></li>
                         </ul>
                         <?php if ($row['no'] > 0) { ?>
                             <button name="search" id="search" type="submit" class="btn btn-primary" value="<?php echo $row['pid']; ?>"> Details</button>

@@ -5,10 +5,9 @@ if (isset($_POST['iid'])) {
     $uid = $_SESSION["uid"];
     $iid = $_POST['iid'];
     unset($_POST);
-    $qry = "SELECT T.id AS invoice, T.uname, U.email, date(T.timestamp) as date, T.total, T.quantity, S.cost, T.pname FROM transaction T INNER JOIN user U ON U.uid=T.uid INNER JOIN stocks S ON S.pid=T.pid WHERE T.id='$iid'";
+    $qry = "SELECT T.id AS invoice, T.uname, U.email, U.address, date(T.timestamp) as date, T.total, T.quantity, S.cost, T.pname FROM transaction T INNER JOIN user U ON U.uid=T.uid INNER JOIN stocks S ON S.pid=T.pid WHERE T.id='$iid'";
     $query_run = mysqli_query($conn, $qry);
     if ($row = mysqli_fetch_assoc($query_run)) { ?>
-
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
         <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
@@ -20,18 +19,22 @@ if (isset($_POST['iid'])) {
                 <address>
                     <p>Murgesh Distributions</p>
                 </address>
-                <table class="meta">
+                <table>
                     <tr>
                         <th><span>Invoice #</span></th>
                         <td><span><?php echo $row['invoice']; ?></span></td>
+                    </tr>
+                    <tr>
+                        <th><span>Buyer Name : </span></th>
+                        <td><span><?php echo $row['uname']; ?></span></td>
                     </tr>
                     <tr>
                         <th><span>Email</span></th>
                         <td><span><?php echo $row['email']; ?></span></td>
                     </tr>
                     <tr>
-                        <th><span>Buyer Name : </span></th>
-                        <td><span><?php echo $row['uname']; ?></span></td>
+                        <th><span>Delivery Address : </span></th>
+                        <td><span><?php echo $row['address']; ?></span></td>
                     </tr>
                     <tr>
                         <th><span>Date</span></th>
@@ -42,6 +45,7 @@ if (isset($_POST['iid'])) {
                         <td><span id="prefix"> &#x20b9;</span><span><?php echo $row['total']; ?></span></td>
                     </tr>
                 </table>
+                <br>
                 <table class="inventory">
                     <thead>
                         <tr>
@@ -76,9 +80,9 @@ if (isset($_POST['iid'])) {
                 </table>
             </article>
         </div>
-        <div class="row">
-            <dic class="col-2"> <button class="btn btn-primary" id="print">Print</button> </dic>
-            <dic class="col-2"> <button class="btn btn-secondary" id="close">Close</button> </dic>
+        <div class="row justify-content-center">
+            <dic class="col-3"> <button class="btn btn-primary" id="print">Print</button> </dic>
+            <dic class="col-3"> <button class="btn btn-secondary" id="close">Back</button> </dic>
         </div>
 <?php } else {
         echo location("../dashboard/index.php");

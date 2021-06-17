@@ -10,19 +10,34 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+function CreateUser() {
+  var email = document.getElementById("cuemail").value;
+  var password = email.split("@")[0];
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      var user = userCredential.user;
+      var message = "User has been created with email address : " + user.email;
+      showMessage("Created User", message);
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      showMessage(errorCode, errorMessage);
+    });
+}
+
 function SignIn() {
   event.preventDefault();
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
-  console.log(email, password);
   if (email.length < 4) {
     alert("Please enter an email address.");
-    console.log("Please enter a new password.");
     return;
   }
   if (password.length < 4) {
     alert("Please enter a new password.");
-    console.log("Please enter a new password.");
     return;
   }
   // Sign in with email and pass.
@@ -30,9 +45,9 @@ function SignIn() {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(function (userCred) {
-      console.log(userCred);
       var user = userCred.user;
       var rem = document.getElementById("remember-me");
+
       if (rem.checked && email.value !== "") {
         localStorage.usermail = user.email;
         localStorage.checkbox = rem.value;
@@ -50,7 +65,6 @@ function SignIn() {
         title = "Wrong Password";
       }
       showMessage(title, errorMessage);
-      console.log(error);
     });
 }
 
@@ -68,9 +82,8 @@ function SignOut() {
             document.location.href = "../../";
           }
         },
-        error: function (xhr, desc, err) {
-          console.log(xhr);
-          console.log("Details: " + desc + "\nError:" + err);
+        error: function () {
+          showMessage("Cannot Signout Now", "Please try again Later.");
         },
       }); // end ajax call
     });
@@ -99,7 +112,6 @@ function sendPasswordReset() {
         title = "User Not Found";
       }
       showMessage(title, errorMessage);
-      console.log(error);
     });
 }
 

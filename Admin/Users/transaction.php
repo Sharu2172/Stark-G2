@@ -66,7 +66,6 @@
     </table>
     <script>
         $("#dmy").change(function() {
-            console.log(this.value);
             if (this.value === "date") {
                 document.getElementById("date").setAttribute("name", "date");
                 document.getElementById("date").setAttribute("type", "date");

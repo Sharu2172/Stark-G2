@@ -31,6 +31,7 @@ if (!empty($_POST['search'])) {
                                     <li class="list-group-item">Product : <?php echo $row['pname']; ?></li>
                                     <li class="list-group-item">Brand : <?php echo $row['brand']; ?></li>
                                     <li class="list-group-item">Price : <?php echo $row["cost"]; ?></li>
+                                    <li class="list-group-item">Quantity : <?php echo $row["no"]; ?></li>
                                 </ul>
                                 <button name="search" id="search" type="submit" class="btn btn-primary" value="<?php echo $row['pid']; ?>"> Details </button>
                             </div>
@@ -61,7 +62,7 @@ if (!empty($_POST['search'])) {
             <div class="container">
                 <h2 class=" text-center"><u><?php echo $row['pname'] ?></u></h2>
                 <br>
-                <?php echo $row["Description"] ?>
+                Description : <?php echo $row["Description"] ?>
                 <br>
                 Cost : <?php echo $row["cost"] ?>
             </div>

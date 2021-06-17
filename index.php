@@ -5,14 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.83.1">
-    <title>Signin Template · Bootstrap v5.0</title>
+    <title>Sign In</title>
     <!-- Bootstrap core CSS -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="assets/vendor/jquery/jquery-3.6.0.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Our Custom CSS -->
 
     <link href="assets/css/login.css" rel="stylesheet">
     <style>
@@ -105,7 +102,7 @@
         }
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                if (user.email === "admin@gmail.com") {
+                if (user.email === "dsharath217@gmail.com") {
                     $.ajax({
                         url: "Admin/extra/Store.php",
                         type: "post",
@@ -125,28 +122,36 @@
                         },
                     });
                 } else {
-                    $.ajax({
-                        url: "User/extra/Store.php",
-                        type: "post",
-                        data: {
-                            function: "store",
-                            uid: user.uid,
-                            email: user.email,
-                            name: user.displayName
-                        },
-                        success: function(status) {
-                            if (status === "profile") {
-                                document.location.href = "User/profile/";
-                            } else {
-                                document.location.href = "User/dashboard/";
-                            }
-                        },
-                        error: function(xhr, desc, err) {
-                            showMessage("Login Error", "Cannot Login Now.Please Try Again Later...");
-                            console.log(xhr);
-                            console.log("Details: " + desc + "\nError:" + err);
-                        },
-                    });
+                    if (user.emailVerified == false) {
+                        firebase.auth().currentUser.sendEmailVerification().then(function() {
+                            // Email Verification sent!
+                            showMessage("Email Not Verified", "Verification Email Sent.Please Verify your Email.");
+                        });
+                        firebase.auth().signOut();
+                    } else {
+                        $.ajax({
+                            url: "User/extra/Store.php",
+                            type: "post",
+                            data: {
+                                function: "store",
+                                uid: user.uid,
+                                email: user.email,
+                                name: user.displayName
+                            },
+                            success: function(status) {
+                                if (status === "profile") {
+                                    document.location.href = "User/profile/";
+                                } else {
+                                    document.location.href = "User/dashboard/";
+                                }
+                            },
+                            error: function(xhr, desc, err) {
+                                showMessage("Login Error", "Cannot Login Now.Please Try Again Later...");
+                                console.log(xhr);
+                                console.log("Details: " + desc + "\nError:" + err);
+                            },
+                        });
+                    }
                 }
 
             }
