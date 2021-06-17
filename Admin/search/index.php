@@ -45,7 +45,7 @@ if (!empty($_POST['search'])) {
         <center>
             <h3><u><?php echo $row["product"]; ?></u></h3>
         </center>
-        <main class="col-md-auto ms-sm-auto col-lg-auto px-md-4">
+        <main class="col-md-auto ms-sm-auto col-lg-auto px-md-4 justify-content-center">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <?php
@@ -64,39 +64,22 @@ if (!empty($_POST['search'])) {
                 <?php echo $row["Description"] ?>
             </div>
             <hr class=" dropdown-divider">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-cart">
-                Purchase
-            </button>
-        </main>
-        <div class="modal fade" id="add-cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Add To cart</h5>
-                        <span aria-hidden="true">&times;</span>
+            <center>
+                <div class="row text-center justify-content-center">
+                    <form action="edit.php" class=" col-2" method="POST">
+                        <button type="submit" class="btn btn-primary" value="<?php echo $row['pid'] ?>" name="pid">
+                            Edit Details
                         </button>
-                    </div>
-                    <!-- Modal Body -->
-                    <form action='../extra/add.php' method='post' enctype="multipart/form-data">
-                        <div class="modal-body">
-                            Product : <?php echo $row['product'] ?>
-                            <br>
-                            <br>
-                            <input type="text" id="quantity" name="quantity" placeholder="Enter Qantity" required>
-                            <br>
-                            <input type="text" id="pid" name="pid" value='<?php echo $row['pid'] ?>' hidden>
-                            <input type="text" id="uid" name="uid" value='<?php echo $_SESSION['uid'] ?>' hidden>
-                            <input type="text" id="cost" name="cost" value='<?php echo $row['cost'] ?>' hidden>
-                        </div>
-                        <!-- Modal Footer -->
-                        <div class="modal-footer text-center">
-                            <button type="submit" class="btn btn-primary"> Add to Cart </button>
-                        </div>
+                    </form>
+                    <form action="remove.php" class="col-2" method="POST">
+                        <button type="submit" class="btn btn-danger" value="<?php echo $row['pid'] ?>" name="pid">
+                            Remove Product
+                        </button>
                     </form>
                 </div>
-            </div>
-        </div>
+
+            </center>
+        </main>
 <?php    }
 } else {
     echo location("../dashboard/");

@@ -64,9 +64,14 @@ if (!empty($_POST['search'])) {
                 <?php echo $row["Description"] ?>
             </div>
             <hr class=" dropdown-divider">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-cart">
-                Purchase
-            </button>
+            <?php if ($row['no'] > 0) { ?>
+                <button type="button" class="btn btn-primary justify-content-center" data-bs-toggle="modal" data-bs-target="#add-cart">
+                    Purchase
+                </button>
+            <?php } else { ?><button type="button" class="btn btn-secondary justify-content-center" disabled>
+                    Out of Stock
+                </button>
+            <?php } ?>
         </main>
         <div class="modal fade" id="add-cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -82,8 +87,10 @@ if (!empty($_POST['search'])) {
                         <div class="modal-body">
                             Product : <?php echo $row['product'] ?>
                             <br>
+                            Avilable Quantity : <?php echo $row['no'] ?>
                             <br>
-                            <input type="text" id="quantity" name="quantity" placeholder="Enter Qantity" required>
+                            <label for="quantity">Required Quantity : </label>
+                            <input type="number" id="quantity" name="quantity" placeholder="Enter Qantity" min="1" max="<?php echo $row['no']; ?>" required>
                             <br>
                             <input type="text" id="pid" name="pid" value='<?php echo $row['pid'] ?>' hidden>
                             <input type="text" id="uid" name="uid" value='<?php echo $_SESSION['uid'] ?>' hidden>

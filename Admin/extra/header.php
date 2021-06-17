@@ -58,9 +58,9 @@ AAccess();
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="../profile/index.php">
+                            <a class="dropdown-item" href="../Users/index.php">
                                 <i class="fas fa-user"></i>
-                                <span>Profile</span>
+                                <span>Users</span>
                             </a>
                         </li>
                         <li>
