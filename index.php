@@ -105,25 +105,50 @@
         }
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                $.ajax({
-                    url: "User/extra/Store.php",
-                    type: "post",
-                    data: {
-                        function: "store",
-                        uid: user.uid,
-                        email: user.email
-                    },
-                    success: function(status) {
-                        console.log(status);
-                        if (status === "sucess") {
-                            document.location.href = "User/dashboard/";
-                        }
-                    },
-                    error: function(xhr, desc, err) {
-                        console.log(xhr);
-                        console.log("Details: " + desc + "\nError:" + err);
-                    },
-                });
+                if (user.email === "admin@gmail.com") {
+                    $.ajax({
+                        url: "Admin/extra/Store.php",
+                        type: "post",
+                        data: {
+                            function: "store",
+                            auid: user.uid,
+                            aemail: user.email,
+                            aname: user.displayName
+                        },
+                        success: function(status) {
+                            document.location.href = "Admin/dashboard/";
+                        },
+                        error: function(xhr, desc, err) {
+                            showMessage("Login Error", "Cannot Login Now.Please Try Again Later...");
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        },
+                    });
+                } else {
+                    $.ajax({
+                        url: "User/extra/Store.php",
+                        type: "post",
+                        data: {
+                            function: "store",
+                            uid: user.uid,
+                            email: user.email,
+                            name: user.displayName
+                        },
+                        success: function(status) {
+                            if (status === "profile") {
+                                document.location.href = "User/profile/";
+                            } else {
+                                document.location.href = "User/dashboard/";
+                            }
+                        },
+                        error: function(xhr, desc, err) {
+                            showMessage("Login Error", "Cannot Login Now.Please Try Again Later...");
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        },
+                    });
+                }
+
             }
         });
     </script>

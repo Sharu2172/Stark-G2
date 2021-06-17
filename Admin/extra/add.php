@@ -12,11 +12,11 @@ if (isset($_POST['uid'])) {
     $result = $conn->query($sql);
     if ($result) {
         echo "<script type='text/javascript'>alert('Transaction Sucessful');</script>";
-        echo location("../bill/index.php", "pid", $pid, "quantity", $quantity);
+        echo location("../search/index.php", "search", $pid);
     } else {
         echo "<script type='text/javascript'>alert('Cannot Complete transaction. Please try again later...');</script>";
         echo location("../search/index.php", "search", $pid);
     }
 } else {
-    echo location("../dashboard/index.php");
+    echo location("../search/index.php", "search", $pid);
 }

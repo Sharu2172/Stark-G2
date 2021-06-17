@@ -26,6 +26,16 @@ function Access()
     }
 }
 
+function AAccess()
+{
+    if (!isset($_SESSION["auid"]) || $_SESSION["auid"] === "") {
+        echo "<script type='text/javascript'>
+    alert('Please Login As Admin to Access This Page.');
+</script>";
+        echo location("../../");
+    }
+}
+
 //Function show Message redirect user to another page with preset post variables.
 function modal($mid, $title, $body, $buttonid, $button = '')
 {
