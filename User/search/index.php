@@ -76,13 +76,14 @@ if (!empty($_POST['search'])) {
                 </button>
             <?php } ?>
         </main>
-        <div class="modal fade" id="add-cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="purchase" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Add To cart</h5>
-                        <span aria-hidden="true">&times;</span>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Purchase</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='$("#purchase").modal("hide");'>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <!-- Modal Body -->
@@ -102,7 +103,8 @@ if (!empty($_POST['search'])) {
                         </div>
                         <!-- Modal Footer -->
                         <div class="modal-footer text-center">
-                            <button type="submit" class="btn btn-primary"> Add to Cart </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='$("#purchase").modal("hide");'> Close </button>
+                            <button type="submit" class="btn btn-primary"> Purchase </button>
                         </div>
                     </form>
                 </div>

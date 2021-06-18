@@ -36,23 +36,28 @@
             <?php
             // This query is used for reading student data from database.
             if (isset($_POST["date"])) {
-                $query = "SELECT U.uname , S.pname , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S , user U WHERE T.pid=S.pid AND T.uid=U.uid AND date(timestamp) = '$_POST[date]'";
+                $query = "SELECT * FROM transaction T WHERE date(timestamp) = '$_POST[date]'";
+                unset($_POST["date"]);
             } else if (isset($_POST["month"])) {
                 $month = substr($_POST["month"], 5, 6);
                 $year = substr($_POST["month"], 0, 4);
-                $query = "SELECT U.uname , S.pname , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S , user U WHERE T.pid=S.pid AND T.uid=U.uid AND month(timestamp) = '$month' AND year(timestamp) = '$year'";
+                $query = "SELECT * FROM transaction T WHERE month(timestamp) = '$month' AND year(timestamp) = '$year'";
+                unset($_POST["month"]);
             } else if (isset($_POST["year"])) {
-                $query = "SELECT U.uname , S.pname , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S , user U WHERE T.pid=S.pid AND T.uid=U.uid AND year(timestamp) = '$_POST[year]'";
+                $query = "SELECT * FROM transaction T WHERE year(timestamp) = '$_POST[year]'";
+                unset($_POST["year"]);
             } else {
-                $query = "SELECT U.uname , S.pname , S.cost , T.total , T.quantity , S.brand , date(T.timestamp) as date FROM transaction T , stocks S , user U WHERE T.pid=S.pid AND T.uid=U.uid";
+                $query = "SELECT * FROM transaction T";
+            }
+            foreach ($_POST as $val) {
+                echo $val . '  ';
             }
             $query_run = mysqli_query($conn, $query);
             $count = 1;
             while ($row = mysqli_fetch_assoc($query_run)) {
             ?>
                 <tr>
-                    <th scope="row"> <?php echo $count;
-                                        $count++; ?> </th>
+                    <th scope="row"> <?php $row['id']; ?> </th>
                     <td> <?php echo $row['uname']; ?> </td>
                     <td> <?php echo $row['pname']; ?> </td>
                     <td> <?php echo $row['brand']; ?> </td>

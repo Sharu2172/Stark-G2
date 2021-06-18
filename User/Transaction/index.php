@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-3">
         <button id="submit" class=" btn btn-primary form-control">
-            Submit
+            Filter
         </button>
     </div>
 </div>

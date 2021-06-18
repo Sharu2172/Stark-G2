@@ -1,4 +1,3 @@
-
 <?php
 include('../../config.php');
 //To allow only admin's to access this page
@@ -44,5 +43,3 @@ if (isset($_POST['pid'])) {
 } else {
     echo location("../dashboard/index.php");
 }
-
-?>

@@ -21,11 +21,11 @@ if (isset($_POST['name'])) {
     $result = $conn->query($query);
     if ($result) {
         echo "<script type='text/javascript'>alert('Product Added Sucessfully');</script>";
-        echo location("../search/index.php", "search", $pid);
+        echo location("../dashboard/index.php");
     } else {
         echo "<script type='text/javascript'>alert('Cannot Add Product. Please try again later...');</script>";
-        echo location("../search/index.php", "search", $pid);
+        echo location("../dashboard/index.php");
     }
 } else {
-    echo location("../search/index.php", "search", $pid);
+    echo location("../dashboard/index.php");
 }

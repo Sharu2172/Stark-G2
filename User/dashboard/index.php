@@ -30,7 +30,7 @@ include("../extra/header.php");
                             <li class="list-group-item">Quantity : <?php echo $row["no"]; ?></li>
                         </ul>
                         <?php if ($row['no'] > 0) { ?>
-                            <button name="search" id="search" type="submit" class="btn btn-primary" value="<?php echo $row['pid']; ?>"> Details</button>
+                            <button name="search" id="search" type="submit" class="btn btn-primary" value="<?php echo $row['pid']; ?>">Details</button>
                         <?php } else { ?><button type="button" class="btn btn-secondary justify-content-center" disabled>
                                 Out of Stock
                             </button>

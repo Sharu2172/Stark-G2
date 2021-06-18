@@ -1,4 +1,3 @@
-
 <?php
 include('../../config.php');
 
@@ -45,4 +44,3 @@ if ($conn->query($query)) {
     }
     echo location("index.php");
 }
-?>

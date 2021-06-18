@@ -68,11 +68,11 @@ if (!empty($_POST['search'])) {
             </div>
             <hr class=" dropdown-divider">
             <center>
-                <div class="row text-center justify-content-center">
-                    <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#edit-product">
+                <div class="d-grid gap-2 d-md-block justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-product">
                         Edit Product
                     </button>
-                    <button type="button" class="btn btn-danger col-3" data-bs-toggle="modal" data-bs-target="#remove-product">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#remove-product">
                         Remove Product
                     </button>
                 </div>
@@ -135,7 +135,7 @@ if (!empty($_POST['search'])) {
                                 </div>
                             </div>
                             <!-- Modal Footer -->
-                            <div class="modal-footer">
+                            <div class="d-grid gap-2 d-md-block">
                                 <button type="reset" class="btn btn-secondary" data-dismiss="modal" onclick='$("#edit-product").modal("hide");'> Close </button>
                                 <button type="submit" class="btn btn-outline-primary"> Submit </button>
                             </div>

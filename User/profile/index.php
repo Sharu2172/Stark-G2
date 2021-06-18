@@ -68,7 +68,7 @@ $row = mysqli_fetch_assoc($query_run)
             </fieldset>
             <br>
             <button type="button" class="btn btn-success btn-outline-light" data-bs-toggle="modal" data-bs-target="#edit-details">
-                Edit Details
+                Edit Profile
             </button>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-email">
                 Edit Email
@@ -100,7 +100,7 @@ $row = mysqli_fetch_assoc($query_run)
                         <!-- Modal Footer -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='$("#edit-email").modal("hide");'> Close </button>
-                            <button type="button" class="btn btn-outline-primary" onclick='$("#edit-email").modal("hide"); updateMail();'> Submit </button>
+                            <button type="button" class="btn btn-outline-primary" onclick='$("#edit-email").modal("hide"); updateMail();'> Confirm </button>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@ $row = mysqli_fetch_assoc($query_run)
                     <!-- Modal Footer -->
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary" data-dismiss="modal" onclick='$("#remove-account").modal("hide");'> Close </button>
-                        <button type="submit" class="btn btn-outline-primary" onclick="removeUser('<?php echo $row['email']; ?>');"> Submit </button>
+                        <button type="submit" class="btn btn-outline-primary" onclick="$('#remove-account').modal('hide'); removeUser('<?php echo $row['email']; ?>');"> Confirm </button>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@ $row = mysqli_fetch_assoc($query_run)
                                 <label for="updategn" class="col-sm-5 col-form-label"><b>Gender : </b></label>
                                 <div class="col-sm-5">
                                     <select class="form-select" id="updategn" name="gender">
-                                        <option selected value="<?php echo $row['gender']; ?>"><?php echo $row['gender']; ?></option>
+                                        <option selected value="<?php echo $row['gender']; ?>"> Selected : <?php echo $row['gender']; ?></option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Not_Selected">Not Slected</option>
@@ -194,7 +194,7 @@ $row = mysqli_fetch_assoc($query_run)
                         <!-- Modal Footer -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='$("#edit-details").modal("hide");'> Close </button>
-                            <button type=" submit" class="btn btn-outline-primary"> Submit </button>
+                            <button type=" submit" class="btn btn-outline-primary"> Confirm </button>
                         </div>
                     </form>
                 </div>

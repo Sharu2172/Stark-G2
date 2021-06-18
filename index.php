@@ -77,9 +77,8 @@
     </main>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js">
-    </script>
     <script src="assets/js/firebase.js"></script>
+    <script src="assets/js/message.js"></script>
     <script type="text/javascript">
         document.getElementById("sign-in").addEventListener("click", SignIn, false);
         document
@@ -139,8 +138,10 @@
                             success: function(status) {
                                 if (status === "profile") {
                                     document.location.href = "User/profile/";
-                                } else {
+                                } else if (status === "sucess") {
                                     document.location.href = "User/dashboard/";
+                                } else {
+                                    showMessage("Login Error", status);
                                 }
                             },
                             error: function(xhr, desc, err) {

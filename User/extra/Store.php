@@ -5,7 +5,7 @@ if ($_POST['function'] == 'store') {
         $_SESSION['uid'] = $_POST['uid'];
         $result = $conn->query("SELECT uid , uname , image, email FROM user WHERE uid = '" . $_SESSION["uid"] . "'");
         $row = mysqli_fetch_row($result);
-        if (empty($row[0])) {
+        if (empty($row['uid'])) {
             $name = time();
             $_SESSION['name'] = $name;
             $_SESSION['image'] = "";
@@ -13,16 +13,24 @@ if ($_POST['function'] == 'store') {
             if (mysqli_query($conn, $qry)) {
                 echo "profile";
             } else {
-                echo "failed";
+                if ($conn->errno == 1062) {
+                    if (mysqli_query($conn, "UPDATE user SET uid='$_POST[uid]' WHERE email='$_POST[email]'")) {
+                        echo "sucess";
+                    } else {
+                        echo "Contact the Admin for Details";
+                    }
+                } else {
+                    echo "Cannot Login Now. Try Again Later";
+                }
             }
         } else {
-            if ($_POST['email'] == $row[3]) {
+            if ($_POST['email'] == $row['email']) {
                 $conn->query("UPDATE user SET login_time = CURRENT_TIMESTAMP WHERE uid = '" . $_SESSION["uid"] . "'");
             } else {
                 $conn->query("UPDATE user SET login_time = CURRENT_TIMESTAMP , email = '$_POST[email]' WHERE uid = '" . $_SESSION["uid"] . "'");
             }
-            $_SESSION['name'] = $row[1];
-            $_SESSION['image'] = $row[2];
+            $_SESSION['name'] = $row['uname'];
+            $_SESSION['image'] = $row['image'];
             echo "sucess";
         }
     }

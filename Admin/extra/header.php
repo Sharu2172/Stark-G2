@@ -25,6 +25,7 @@ AAccess();
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="../../assets/js/firebase.js"></script>
+    <script src="../../assets/js/message.js"></script>
     <header class="py-3 mb-4 border-bottom shadow sticky-top bg-light">
         <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
             <div>

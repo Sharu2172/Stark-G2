@@ -15,7 +15,7 @@ if (isset($_POST['uid'])) {
     if ($result) {
         $sql1 = "UPDATE stocks SET no = '$bal' WHERE pid=$pid";
         $conn->query($sql1);
-        echo "<script type='text/javascript'>alert('Transaction Sucessful');</script>";
+        echo "<script type='text/javascript'>showMessage('Transaction Sucessful');</script>";
         echo location("../bill/index.php", "iid", $id);
     } else {
         echo "<script type='text/javascript'>alert('Cannot Complete transaction. Please try again later...');</script>";
