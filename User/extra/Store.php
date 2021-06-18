@@ -3,7 +3,7 @@ include("../../config.php");
 if ($_POST['function'] == 'store') {
     if (isset($_POST['uid'])) {
         $_SESSION['uid'] = $_POST['uid'];
-        $result = $conn->query("SELECT uid , uname , image, email FROM user WHERE uid = '" . $_SESSION["uid"] . "'");
+        $result = $conn->query("SELECT uid , uname , image, email FROM user WHERE uid = '$_SESSION[uid]'");
         $row = mysqli_fetch_row($result);
         if (empty($row['uid'])) {
             $name = time();
@@ -14,7 +14,10 @@ if ($_POST['function'] == 'store') {
                 echo "profile";
             } else {
                 if ($conn->errno == 1062) {
-                    if (mysqli_query($conn, "UPDATE user SET uid='$_POST[uid]' WHERE email='$_POST[email]'")) {
+                    $uid = mysqli_fetch_row($conn->query("SELECT uid , uname , image FROM user WHERE email= '$_POST[email]'"));
+                    if (mysqli_query($conn, "UPDATE user SET uid='$_POST[uid]' WHERE email='$_POST[email]'") && mysqli_query($conn, "UPDATE transaction SET uid = '$_SESSION[uid]' WHERE uid = '$uid[0]'")) {
+                        $_SESSION['name'] = $uid[1];
+                        $_SESSION['image'] = $uid[2];
                         echo "sucess";
                     } else {
                         echo "Contact the Admin for Details";

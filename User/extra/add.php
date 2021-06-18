@@ -10,7 +10,7 @@ if (isset($_POST['uid'])) {
     $bal = $no - $quantity;
     $amount = $cost * $quantity;
     $id = time();
-    $sql = "INSERT INTO transaction(id,uid, uname, pid, pname, quantity, total) VALUES ('$id','$uid',(SELECT uname FROM user WHERE uid='$uid'),'$pid',(SELECT pname FROM stocks WHERE pid='$pid'), '$quantity', '$amount')";
+    $sql = "INSERT INTO transaction(id,uid, uname, pid, pname,brand,cost, quantity, total) VALUES ('$id','$uid',(SELECT uname FROM user WHERE uid='$uid'),'$pid',(SELECT pname FROM stocks WHERE pid='$pid'),(SELECT brand FROM stocks WHERE pid='$pid'),(SELECT cost FROM stocks WHERE pid='$pid'), '$quantity', '$amount')";
     $result = $conn->query($sql);
     if ($result) {
         $sql1 = "UPDATE stocks SET no = '$bal' WHERE pid=$pid";

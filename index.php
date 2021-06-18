@@ -40,7 +40,7 @@
                 <label for="email">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="password" placeholder="Password"> <label for=" password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" minlength="8"> <label for=" password">Password</label>
             </div>
 
             <div class="checkbox mb-3">
@@ -78,7 +78,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="assets/js/firebase.js"></script>
-    <script src="assets/js/message.js"></script>
     <script type="text/javascript">
         document.getElementById("sign-in").addEventListener("click", SignIn, false);
         document

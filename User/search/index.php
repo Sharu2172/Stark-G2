@@ -68,7 +68,7 @@ if (!empty($_POST['search'])) {
             </div>
             <hr class=" dropdown-divider">
             <?php if ($row['no'] > 0) { ?>
-                <button type="button" class="btn btn-primary justify-content-center" data-bs-toggle="modal" data-bs-target="#add-cart">
+                <button type="button" class="btn btn-primary justify-content-center" data-bs-toggle="modal" data-bs-target="#purchase">
                     Purchase
                 </button>
             <?php } else { ?><button type="button" class="btn btn-secondary justify-content-center" disabled>
