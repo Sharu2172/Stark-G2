@@ -3,7 +3,7 @@ include("../../config.php");
 if ($_POST['function'] == 'store') {
     if (isset($_POST['uid'])) {
         $_SESSION['uid'] = $_POST['uid'];
-        $result = $conn->query("SELECT uid , uname , image FROM user WHERE uid = '" . $_SESSION["uid"] . "'");
+        $result = $conn->query("SELECT uid , uname , image, email FROM user WHERE uid = '" . $_SESSION["uid"] . "'");
         $row = mysqli_fetch_row($result);
         if (empty($row[0])) {
             $name = time();
@@ -16,7 +16,11 @@ if ($_POST['function'] == 'store') {
                 echo "failed";
             }
         } else {
-            $conn->query("UPDATE user SET login_time = CURRENT_TIMESTAMP WHERE uid = '" . $_SESSION["uid"] . "'");
+            if ($_POST['email'] == $row[3]) {
+                $conn->query("UPDATE user SET login_time = CURRENT_TIMESTAMP WHERE uid = '" . $_SESSION["uid"] . "'");
+            } else {
+                $conn->query("UPDATE user SET login_time = CURRENT_TIMESTAMP , email = '$_POST[email]' WHERE uid = '" . $_SESSION["uid"] . "'");
+            }
             $_SESSION['name'] = $row[1];
             $_SESSION['image'] = $row[2];
             echo "sucess";

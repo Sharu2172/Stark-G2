@@ -81,5 +81,6 @@ Access();
             </div>
         </div>
     </header>
+    <div id="Messages"></div>
     <main class="container-fluid pb-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
         <div class="col overflow-auto h-100 w-100 p-5">

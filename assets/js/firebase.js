@@ -68,6 +68,52 @@ function SignIn() {
     });
 }
 
+function updateMail() {
+  const cemail = document.getElementById("changeemail").value;
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      user
+        .updateEmail(cemail)
+        .then(function () {
+          showMessage(
+            "Update Email Sucessful",
+            "Your Email has been Updated Sucessfully."
+          );
+        })
+        .catch(function (error) {
+          console.log(error);
+          showMessage(error.code, error.message);
+        });
+    } else {
+      showMessage("Cannot Update Email", "Your Email cannot be Updated.");
+    }
+  });
+}
+
+function removeUser(email) {
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      if (user.email === email) {
+        user
+          .delete()
+          .then(function () {
+            showMessage(
+              "Acount Delete Sucessful",
+              "Your Account has been Deleted Sucessfully."
+            );
+            SignOut();
+          })
+          .catch(function (error) {
+            showMessage(error.code, error.message);
+          });
+      } else {
+        showMessage("Cannot Delete Account", "Log Out , Log In and Try Again.");
+      }
+    } else {
+      showMessage("Cannot Delete Account", "Your Account cannot be Deleted.");
+    }
+  });
+}
 function SignOut() {
   firebase
     .auth()

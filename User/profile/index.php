@@ -70,7 +70,66 @@ $row = mysqli_fetch_assoc($query_run)
             <button type="button" class="btn btn-success btn-outline-light" data-bs-toggle="modal" data-bs-target="#edit-details">
                 Edit Details
             </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-email">
+                Edit Email
+            </button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#remove-account">
+                Remove User
+            </button>
         </div>
+
+        <div class="modal fade" id="edit-email" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title">Change Email Address</h5>
+                        <button type="button" class="close bg-transparent border-0" data-dismiss="modal" aria-label="Close" onclick='$("#edit-email").modal("hide");'>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="changeemail" class="col-sm-5 col-form-label"><b>Email : </b></label>
+                            <div class="col-sm-5">
+                                <input type="email" class="form-control" id="changeemail" required>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='$("#edit-email").modal("hide");'> Close </button>
+                            <button type="button" class="btn btn-outline-primary" onclick='$("#edit-email").modal("hide"); updateMail();'> Submit </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="remove-account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title">Remove User Account</h5>
+                        <button type="button" class="close bg-transparent border-0" data-dismiss="modal" aria-label="Close" onclick='$("#remove-account").modal("hide");'>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        Are You sure to Delete your account <?php echo $row['email']; ?> .
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-dismiss="modal" onclick='$("#remove-account").modal("hide");'> Close </button>
+                        <button type="submit" class="btn btn-outline-primary" onclick="removeUser('<?php echo $row['email']; ?>');"> Submit </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- This modal display's form for editing Admin Data. -->
         <div class="modal fade" id="edit-details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
