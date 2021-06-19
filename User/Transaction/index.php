@@ -2,8 +2,8 @@
 <div class="row g-3 p-2">
     <div class="col-md-3">
         <select class="form-select" id="dmy">
-            <option selected value="date">Date</option>
-            <option value="month">Month</option>
+            <option value="date">Date</option>
+            <option selected value="month">Month</option>
             <option value="year">Year</option>
         </select>
     </div>
@@ -26,7 +26,7 @@
                 <th scope="col">Product</th>
                 <th scope="col">Brand</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Cost</th>
+                <th scope="col">Unit Cost</th>
                 <th scope="col">Total</th>
                 <th scope="col">Date</th>
                 <th scope="col">Invoice</th>
